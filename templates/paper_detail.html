@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>{{ paper['title'] }}</title>
+    <style>/* Same CSS as before */ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;color:#E0E0E0;background-color:#121212;max-width:800px;margin:20px auto;padding:20px}h1,h2{color:#BB86FC;border-bottom:2px solid #373737;padding-bottom:10px}a{color:#03DAC6;text-decoration:none}a:hover{text-decoration:underline}p,li{color:#C0C0C0}ul{padding-left:20px}.authors{font-style:italic;color:#A0A0A0}.back-link{display:block;margin-top:40px}</style>
+</head>
+<body>
+    <h1>{{ paper['title'] }}</h1>
+    <p class="authors">{{ paper['authors'] }}</p>
+    <p><a href="{{ paper['pdf_url'] }}" target="_blank">View Original PDF</a></p>
+    <hr>
+    
+    <div>{{ paper['detailed_summary'] | replace('**The Big Picture:**', '<h2>The Big Picture</h2>') | replace('**Key Takeaways:**', '<h2>Key Takeaways</h2><ul>') | replace('**Deeper Dive:**', '<h2>Deeper Dive</h2>') | replace('**Why It Matters:**', '<h2>Why It Matters</h2>') | replace('* ', '<li>') | replace('\n\n', '<p>') | safe }}</ul></div>
+
+    <a href="{{ url_for('homepage') }}" class="back-link">&larr; Back to Digest</a>
+</body>
+</html>

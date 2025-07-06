@@ -1,0 +1,23 @@
+<html>
+<head>
+    <title>ArXiv AI Digest</title>
+    <style>/* Same CSS as before */ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;color:#E0E0E0;background-color:#121212;max-width:800px;margin:20px auto;padding:20px}h1,h2{color:#BB86FC;border-bottom:2px solid #373737;padding-bottom:10px}a{color:#03DAC6;text-decoration:none}a:hover{text-decoration:underline}.paper{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #373737}.authors{font-style:italic;color:#A0A0A0}ul{list-style-type:'✨';padding-left:20px}</style>
+</head>
+<body>
+    <h1>ArXiv AI Digest</h1>
+    <h2>Today's Papers</h2>
+    <form action="/search" method="get" style="margin-bottom: 30px;">
+        <input type="text" name="q" placeholder="Search all papers..." style="width: 70%; padding: 8px;">
+        <button type="submit" style="padding: 8px;">Search</button>
+    </form>
+    {% for paper in papers %}
+    <div class="paper">
+        <h3><a href="{{ url_for('paper_detail', paper_id=paper['id']) }}">{{ paper['title'] }}</a></h3>
+        <p class="authors">{{ paper['authors'] }}</p>
+        <ul>{{ paper['ai_summary'] | replace('* ', '<li>') | safe }}</ul>
+    </div>
+    {% else %}
+    <p>No new papers matching your criteria were found today. Run main.py to fetch new papers.</p>
+    {% endfor %}
+</body>
+</html>
